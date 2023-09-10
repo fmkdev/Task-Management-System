@@ -6,4 +6,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Notifications\" />
+    <Folder Include="Commands\Projects\" />
+    <Folder Include="Commands\Tasks\" />
+    <Folder Include="Queries\Notifications\" />
+    <Folder Include="Queries\Projects\" />
+    <Folder Include="Queries\Tasks\" />
+    <Folder Include="Queries\Users\" />
+  </ItemGroup>
+
 </Project>
