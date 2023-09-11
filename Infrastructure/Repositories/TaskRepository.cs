@@ -54,6 +54,11 @@ namespace Infrastructure.Repositories
             return await _context.Tasks.Where(u => u.UserId == userId).ToListAsync();
         }
 
+        public async Task<Tasks> GetTaskAsync(Guid userId)
+        {
+            return _context.Tasks.FirstOrDefault(u => u.UserId == userId);
+        }
+
         public async Task<Tasks> UpdateAsync(Tasks task)
         {
             _context.Tasks.Update(task);

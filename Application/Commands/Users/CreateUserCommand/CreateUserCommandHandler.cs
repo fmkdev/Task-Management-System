@@ -34,7 +34,7 @@ namespace Application.Commands.Users.CreateUserCommand
             var user = new User(Guid.NewGuid(), request.name, request.email);
             await _userRepository.AddAsync(user);
 
-            //Save to Database
+            //Save to Database and return result
             await _unitOfWork.SaveChangesAsync();
             return await Result<string>.SuccessAsync($"User with Email: {user.Email} was created Successfully");
         }

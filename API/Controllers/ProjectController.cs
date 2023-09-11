@@ -1,22 +1,22 @@
 ﻿using APi.Filters;
-using Application.Commands.Users.CreateUserCommand;
-using Application.Commands.Users.DeleteUserCommand;
-using Application.Commands.Users.UpdateUserCommand;
+using Application.Commands.Projects.CreateProjectCommand;
+using Application.Commands.Projects.DeleteProjectCommand;
+using Application.Commands.Projects.UpdateProjectCommand;
 using Application.Models;
-using Application.Queries.Users.GetUserByEmailQuery;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace API.Controllers
 {
-    [Route("api/user")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ProjectController : ControllerBase
     {
         private readonly IMediator _mediatr;
 
-        public UserController(IMediator mediatr)
+        public ProjectController(IMediator mediatr)
         {
             _mediatr = mediatr;
         }
@@ -25,9 +25,9 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Create([FromBody] CreateUserCommand request)
+        public async Task<IActionResult> Create([FromBody] CreateProjectRequest request)
         {
-            var response = await _mediatr.Send(new CreateUserCommand(request.name, request.email));
+            var response = await _mediatr.Send(new CreateProjectRequest(request.userId, request.name, request.description));
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
 
@@ -35,9 +35,9 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Update([FromBody] UpdateUserRequest request)
+        public async Task<IActionResult> Update([FromBody] UpdateProjectRequest request)
         {
-            var response = await _mediatr.Send(new UpdateUserRequest(request.name, request.email));
+            var response = await _mediatr.Send(new UpdateProjectRequest(request.projectId, request.userId, request.name, request.description));
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
 
@@ -45,19 +45,9 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Delete([FromBody] DeleteUserRequest request)
+        public async Task<IActionResult> Delete([FromBody] DeleteProjectRequest request)
         {
-            var response = await _mediatr.Send(new DeleteUserRequest(request.email));
-            return response.Succeeded ? Ok(response) : BadRequest(response);
-        }
-
-        [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Get([FromBody] GetUserByMailRequest request)
-        {
-            var response = await _mediatr.Send(new GetUserByMailRequest(request.email));
+            var response = await _mediatr.Send(new DeleteProjectRequest(request.userId, request.projectId));
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
     }

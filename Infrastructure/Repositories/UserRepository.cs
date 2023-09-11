@@ -43,6 +43,11 @@ namespace Infrastructure.Repositories
             return _context.Users.FirstOrDefault(u => u.Email == email);
         }
 
+        public async Task<User> GetAsync(Guid id)
+        {
+            return _context.Users.FirstOrDefault(u => u.Id == id);
+        }
+
         public async Task<IList<User>> GetAsync()
         {
             return await _context.Users.ToListAsync();

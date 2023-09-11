@@ -12,6 +12,7 @@ namespace Domain.Contracts.Repositories
         Task<User> AddAsync(User user);
         Task<User> UpdateAsync(User user);
         Task<User> GetAsync(string email);
+        Task<User> GetAsync(Guid id);
         Task<IList<User>> GetAsync();
         Task<bool> ExitsAsync(string email);
         Task<bool> DeleteAsync(User user);

@@ -31,9 +31,14 @@ namespace Infrastructure.Repositories
             return true;
         }
 
-        public async Task<IList<Notification>> GetAsync(Guid userId)
+        public async Task<IList<Notification>> GetAllAsync(Guid userId)
         {
             return await _context.Notifications.Where(u => u.UserId == userId).ToListAsync();
+        }
+
+        public async Task<Notification> GetAsync(Guid userId)
+        {
+            return await _context.Notifications.FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
         public async Task<Notification> UpdateAsync(Notification notification)

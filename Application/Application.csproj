@@ -16,13 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Notifications\" />
-    <Folder Include="Commands\Projects\" />
-    <Folder Include="Commands\Tasks\" />
     <Folder Include="Queries\Notifications\" />
     <Folder Include="Queries\Projects\" />
     <Folder Include="Queries\Tasks\" />
-    <Folder Include="Queries\Users\" />
   </ItemGroup>
 
 </Project>

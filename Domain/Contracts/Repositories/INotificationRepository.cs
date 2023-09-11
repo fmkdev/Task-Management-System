@@ -11,7 +11,8 @@ namespace Domain.Contracts.Repositories
     {
         Task<Notification> AddAsync(Notification notification);
         Task<Notification> UpdateAsync(Notification notification);
-        Task<IList<Notification>> GetAsync(Guid userId);
+        Task<IList<Notification>> GetAllAsync(Guid userId);
+        Task<Notification> GetAsync(Guid userId);
         Task<bool> DeleteAsync(Notification notification);
     }
 }

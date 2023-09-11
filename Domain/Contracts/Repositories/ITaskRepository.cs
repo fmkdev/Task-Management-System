@@ -12,6 +12,7 @@ namespace Domain.Contracts.Repositories
     {
         Task<Tasks> AddAsync(Tasks task);
         Task<Tasks> UpdateAsync(Tasks task);
+        Task<Tasks> GetTaskAsync(Guid userId);
         Task<IList<Tasks>> GetAsync(Guid userId, Status status = Status.Pending, Priority priority = Priority.Low);
         Task<IList<Tasks>> FetchDueTaskOfTheWeek(Guid userId);
         Task<IList<Tasks>> GetAsync(Guid userId);
