@@ -1,6 +1,8 @@
 ﻿using Application.Abstractions.Messaging;
+using Application.Queries.Users.GetUserByEmailQuery;
 using Domain.Contracts.Repositories;
 using Domain.Wrapper;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,11 @@ namespace Application.Queries.Users.GetAllUserQuerry
 
         public async Task<Result<IList<GetAllUserUserResponse>>> Handle(GetAllUserRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var users = await _userRepository.GetAsync();
+
+            var data = users.Adapt<IList<GetAllUserUserResponse>>();
+
+            return await Result<IList<GetAllUserUserResponse>>.SuccessAsync(data, "success");
         }
     }
 }

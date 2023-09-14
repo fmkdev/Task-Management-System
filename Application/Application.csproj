@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
 
@@ -18,7 +19,6 @@
   <ItemGroup>
     <Folder Include="Queries\Notifications\" />
     <Folder Include="Queries\Projects\" />
-    <Folder Include="Queries\Tasks\" />
   </ItemGroup>
 
 </Project>

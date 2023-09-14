@@ -1,4 +1,5 @@
 using Infrastructure.Extentions;
+using Application.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+
+
 //Add Services and application
 builder.Services.AddServices()
+    .AddApplication()
     .AddLogging()
     .AddCors();
 

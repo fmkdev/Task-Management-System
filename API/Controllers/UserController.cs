@@ -3,6 +3,7 @@ using Application.Commands.Users.CreateUserCommand;
 using Application.Commands.Users.DeleteUserCommand;
 using Application.Commands.Users.UpdateUserCommand;
 using Application.Models;
+using Application.Queries.Users.GetAllUserQuerry;
 using Application.Queries.Users.GetUserByEmailQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,16 @@ namespace API.Controllers
         public async Task<IActionResult> Get([FromBody] GetUserByMailRequest request)
         {
             var response = await _mediatr.Send(new GetUserByMailRequest(request.email));
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpGet("GetAllUSers")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _mediatr.Send(new GetAllUserRequest());
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Messaging;
 using Domain.Contracts.Repositories;
 using Domain.Wrapper;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace Application.Queries.Users.GetUserByEmailQuery
 
             //fetch user
             var user = await _userRepository.GetAsync(request.email);
-            var data = new GetUserByMailResponse(user.Name, user.Email);
+            var data = user.Adapt<GetUserByMailResponse>();
+
             //return result
             return await Result<GetUserByMailResponse>.SuccessAsync(data);
         }

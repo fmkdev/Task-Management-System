@@ -3,6 +3,7 @@ using Application.Commands.Tasks.CreateTaskCommand;
 using Application.Commands.Tasks.DeleteTaskCommand;
 using Application.Commands.Tasks.UpdateTaskCommand;
 using Application.Models;
+using Application.Queries.Tasks.GetTasksByUserId;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +50,16 @@ namespace API.Controllers
         public async Task<IActionResult> Delete([FromBody] DeleteTaskRequest request)
         {
             var response = await _mediatr.Send(new DeleteTaskRequest(request.userId, request.taskId));
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> Get([FromQuery] Guid userId)
+        {
+            var response = await _mediatr.Send(new GetTasksByUserIdRequest(userId));
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
     }

@@ -33,7 +33,7 @@ namespace Application.Commands.Tasks.CreateTaskCommand
             }
 
             //create task
-            var task = new Domain.Entities.Tasks(request.tittle, user.Id, request.description, request.dueDate, request.priority, request.status);
+            var task = new Domain.Entities.Tasks(request.tittle, user.Id, request.description, request.dueDate, request.priority, Domain.Enums.Status.Pending);
             var result = await _taskRepository.AddAsync(task);
 
             //Save to Database and return result

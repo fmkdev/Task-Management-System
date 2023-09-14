@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.Users.GetAllUserQuerry
 {
-    public sealed record GetAllUserUserResponse(string name, string email)
+    public sealed record GetAllUserUserResponse(Guid Id, string name, string email)
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Tasks.CreateTaskCommand
 {
-    public sealed record CreateTaskRequest(string tittle, Guid userId, string description, DateTime dueDate, Priority priority, Status status) : ICommand
+    public sealed record CreateTaskRequest(string tittle, Guid userId, string description, DateTime dueDate, Priority priority) : ICommand
     {
     }
 }
